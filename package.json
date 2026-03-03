@@ -1,7 +1,7 @@
 {
   "name": "lazy_mobile_mcp",
   "version": "0.1.0",
-  "description": "Local MCP server for mobile control and performance telemetry",
+  "description": "Local MCP server for Android/iOS device automation and performance telemetry (ADB, simctl, devicectl, WDA)",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -37,10 +37,24 @@
     "mcp",
     "mobile",
     "android",
-    "ios"
+    "ios",
+    "mobile-automation",
+    "adb",
+    "webdriveragent",
+    "simctl",
+    "performance-telemetry",
+    "model-context-protocol"
   ],
-  "author": "",
+  "author": "leaf76",
   "license": "MIT",
+  "homepage": "https://github.com/leaf76/lazy_mobile_mcp#readme",
+  "bugs": {
+    "url": "https://github.com/leaf76/lazy_mobile_mcp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leaf76/lazy_mobile_mcp.git"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.22.4",
     "zod": "^4.1.12"
