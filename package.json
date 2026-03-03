@@ -28,7 +28,7 @@
     "dev": "tsx src/index.ts",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:py": "python3 -m pytest python/tests",
+    "test:py": "sh -c 'if [ ! -d .venv ]; then python3 -m venv .venv; fi; ./.venv/bin/python -m pip install -r python/requirements.txt >/dev/null; ./.venv/bin/python -m pytest python/tests'",
     "lint": "tsc --noEmit",
     "start": "node dist/index.js",
     "prepublishOnly": "npm run build && npm test && npm run test:py"
