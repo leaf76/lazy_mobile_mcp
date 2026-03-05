@@ -19,5 +19,5 @@
 - Every request has a `trace_id`.
 - The same `trace_id` appears in:
   - tool error response
-  - TypeScript and Python log lines
+  - TypeScript MCP/worker log lines
   - session metadata where applicable

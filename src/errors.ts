@@ -58,3 +58,13 @@ export function normalizeError(error: unknown, traceId: string): AppError {
     traceId
   });
 }
+
+export class DependencyError extends Error {
+  readonly code: string;
+
+  constructor(message: string, options?: ErrorOptions & { code?: string }) {
+    super(message, options);
+    this.name = "DependencyError";
+    this.code = options?.code ?? "ERR_DEPENDENCY";
+  }
+}

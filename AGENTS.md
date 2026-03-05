@@ -10,6 +10,13 @@ LANGUAGE
 - English only for code, comments, logs, config, UI strings, commit messages.
 - Planning and explanations: Traditional Chinese (Taiwan).
 
+PROJECT NOTES (THIS REPO)
+- Runtime is Node-only. Do not reintroduce Python worker runtime for MCP execution.
+- CLI entrypoint is `bin/lazy-mobile-mcp.js` -> `dist/cli.js`.
+- `lazy-mobile-mcp` starts the MCP server; `lazy-mobile-mcp setup-codex` registers this MCP in Codex.
+- Keep public MCP tool contract in `docs/tool-contract.md` aligned with `src/worker.ts`.
+- When releasing, keep server version and package version in sync (`src/index.ts`, `package.json`).
+
 CORE RULES
 - If requirements or constraints are unclear, ask BEFORE coding.
 - Do NOT modify, revert, delete, or refactor unrelated code or files.

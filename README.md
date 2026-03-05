@@ -39,8 +39,7 @@ Keywords: MCP server, mobile automation, Android ADB automation, iOS simulator a
 
 ## Architecture
 
-- TypeScript MCP server (tool contracts, validation, policy, trace ID)
-- Python worker (device operations, adapters, storage, perf collector)
+- TypeScript MCP server + worker (tool contracts, validation, policy, trace ID)
 - Android adapter (`adb`)
 - iOS adapter (`simctl`, `devicectl`, WDA)
 - SQLite storage (`artifacts/mobile.db`)
@@ -48,7 +47,6 @@ Keywords: MCP server, mobile automation, Android ADB automation, iOS simulator a
 ## Prerequisites
 
 - Node.js 20+
-- Python 3.11+
 - Android: `adb` in `PATH`
 - iOS (optional): macOS + `xcrun` (`simctl`/`devicectl`)
 - For iOS interactive actions (`tap/swipe/input`): reachable WebDriverAgent endpoint
@@ -57,14 +55,40 @@ Keywords: MCP server, mobile automation, Android ADB automation, iOS simulator a
 
 ```bash
 npm install
-python3 -m pip install -r python/requirements.txt
 ```
 
 ## Install From npm
 
 ```bash
 npm install lazy_mobile_mcp
-python3 -m pip install -r node_modules/lazy_mobile_mcp/python/requirements.txt
+```
+
+## Quick Start (Codex)
+
+Requires `codex` CLI in `PATH`.
+
+```bash
+npx -y lazy_mobile_mcp setup-codex
+```
+
+Verify registration:
+
+```bash
+codex mcp get lazy-mobile-mcp
+```
+
+Then open a new Codex session and call `mobile.list_devices`.
+
+## Codex One-Command Setup (Advanced)
+
+Optional overrides:
+
+```bash
+npx -y lazy_mobile_mcp setup-codex \
+  --name lazy-mobile-mcp \
+  --sqlite-path "$HOME/.codex/mcp-data/lazy-mobile/mobile.db" \
+  --adb-bin adb \
+  --wda-base-url http://127.0.0.1:8100
 ```
 
 Run with `npx`:
@@ -77,7 +101,6 @@ Global install:
 
 ```bash
 npm install -g lazy_mobile_mcp
-python3 -m pip install -r "$(npm root -g)/lazy_mobile_mcp/python/requirements.txt"
 lazy-mobile-mcp
 ```
 
@@ -98,11 +121,10 @@ npm start
 
 ## Configuration
 
-- `PYTHON_BIN` (default `python3`)
-- `PYTHON_WORKER_PATH` (default `python/worker.py`)
 - `SQLITE_PATH` (default `artifacts/mobile.db`)
 - `DEVICE_ALLOWLIST` (comma-separated)
 - `LOG_LEVEL` (`debug|info|warn|error`)
+- `ADB_BIN` (default `adb`)
 - `WDA_BASE_URL` (optional override for iOS WDA endpoint)
 
 If `WDA_BASE_URL` is not set, the adapter probes common local endpoints (`127.0.0.1` / `localhost`, ports `8100/8101/8200/8201` + local listening ports).
@@ -117,5 +139,4 @@ If `WDA_BASE_URL` is not set, the adapter probes common local endpoints (`127.0.
 
 ```bash
 npm test
-npm run test:py
 ```

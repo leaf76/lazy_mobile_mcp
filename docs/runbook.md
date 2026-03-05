@@ -7,7 +7,7 @@
 npm run dev
 ```
 
-2. Confirm worker boot and DB creation:
+2. Confirm worker init and DB creation:
 ```bash
 ls artifacts/mobile.db
 ```
@@ -44,7 +44,7 @@ xcrun devicectl list devices
 ## First places to inspect
 
 - TypeScript stderr JSON logs from MCP process.
-- Python worker stderr JSON logs (`worker-log` events).
+- Node worker logs (`worker-started`, `worker-stopped`, and tool/error events).
 - `artifacts/mobile.db` with:
 ```bash
 sqlite3 artifacts/mobile.db '.tables'

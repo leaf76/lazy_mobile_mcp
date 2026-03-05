@@ -35,10 +35,11 @@ async function main(): Promise<void> {
   const logger = new Logger(config.logLevel);
 
   const workerClient = new WorkerClient({
-    pythonBin: config.pythonBin,
-    scriptPath: config.pythonWorkerPath,
     sqlitePath: config.sqlitePath,
-    logger
+    allowlist: config.allowlist,
+    logger,
+    adbBin: config.adbBin,
+    wdaBaseUrl: config.wdaBaseUrl
   });
   await workerClient.start();
 
@@ -49,7 +50,7 @@ async function main(): Promise<void> {
 
   const server = new McpServer({
     name: "lazy-mobile-mcp",
-    version: "0.1.0"
+    version: "1.0.0"
   });
 
   const registerTool = (toolName: ToolName): void => {
@@ -124,7 +125,6 @@ async function main(): Promise<void> {
 
   logger.info("server-started", {
     transport: "stdio",
-    python_worker: config.pythonWorkerPath,
     sqlite_path: config.sqlitePath
   });
 

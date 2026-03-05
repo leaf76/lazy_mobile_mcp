@@ -17,19 +17,19 @@ function parseCsv(input: string | undefined): string[] {
 }
 
 export interface ServerConfig {
-  pythonBin: string;
-  pythonWorkerPath: string;
   allowlist: string[];
   sqlitePath: string;
   logLevel: "debug" | "info" | "warn" | "error";
+  adbBin: string;
+  wdaBaseUrl?: string;
 }
 
 export function loadConfig(): ServerConfig {
   return {
-    pythonBin: process.env.PYTHON_BIN ?? "python3",
-    pythonWorkerPath: process.env.PYTHON_WORKER_PATH ?? path.join(projectRoot, "python", "worker.py"),
     allowlist: parseCsv(process.env.DEVICE_ALLOWLIST),
     sqlitePath: process.env.SQLITE_PATH ?? path.join(projectRoot, "artifacts", "mobile.db"),
-    logLevel: (process.env.LOG_LEVEL as ServerConfig["logLevel"] | undefined) ?? "info"
+    logLevel: (process.env.LOG_LEVEL as ServerConfig["logLevel"] | undefined) ?? "info",
+    adbBin: process.env.ADB_BIN ?? "adb",
+    wdaBaseUrl: process.env.WDA_BASE_URL
   };
 }
